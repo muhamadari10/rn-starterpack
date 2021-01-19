@@ -1,57 +1,27 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { connect } from 'react-redux';
-import { counterAdd, counterSubtract } from './store/actions';
+const Stack = createStackNavigator();
 
-import CounterComponent from './components/counter';
-
-class MainScreen extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
-  render() {
-    return (
-      <View style={styles.mainContainer}>
-
-        <CounterComponent />
-
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={() => this.props.counterAddFunction()}><Text>INCREASE</Text></TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.counterSubtractFunction()}><Text>DECREASE</Text></TouchableOpacity>
-        </View>
-
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-
-  },
-  buttonContainer: {
-
-  },
-});
-
-
-
-const mapStateToProps = state => {
-  return {
-
-  };
+import MainScreen from './screens/main_screen'
+const ProfileScreen = ({ navigation, route }) => {
+  return <Text>This is {route.params.name}'s profile</Text>;
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    counterAddFunction: () => dispatch(counterAdd()),
-    counterSubtractFunction: () => dispatch(counterSubtract()),
-  };
+const MyStack = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={MainScreen}
+          options={{ title: 'Welcome' }}
+        />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);
+export default MyStack;
