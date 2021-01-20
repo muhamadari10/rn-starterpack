@@ -43,19 +43,19 @@ const NavigationDrawerStructure = (props) => {
   );
 };
 
-function firstScreenStack({ navigation }) {
+function MainScreen({ navigation }) {
   return (
-    <Stack.Navigator initialRouteName="FirstPage">
+    <Stack.Navigator initialRouteName="MainPage">
       <Stack.Screen
-        name="FirstPage"
+        name="MainPage"
         component={FirstPage}
         options={{
-          title: 'First Page', //Set Header Title
+          title: 'Stok and Inventory Online', //Set Header Title
           headerLeft: () => (
             <NavigationDrawerStructure navigationProps={navigation} />
           ),
           headerStyle: {
-            backgroundColor: '#f4511e', //Set Header color
+            backgroundColor: '#222', //Set Header color
           },
           headerTintColor: '#fff', //Set Header text color
           headerTitleStyle: {
@@ -67,39 +67,30 @@ function firstScreenStack({ navigation }) {
   );
 }
 
-function secondScreenStack({ navigation }) {
+function HomeScreen({ navigation }) {
   return (
-    <Stack.Navigator
-      initialRouteName="SecondPage"
-      screenOptions={{
-        headerLeft: () => (
-          <NavigationDrawerStructure navigationProps={navigation} />
-        ),
-        headerStyle: {
-          backgroundColor: '#f4511e', //Set Header color
-        },
-        headerTintColor: '#fff', //Set Header text color
-        headerTitleStyle: {
-          fontWeight: 'bold', //Set Header text style
-        },
-      }}>
+    <Stack.Navigator initialRouteName="HomePage">
       <Stack.Screen
-        name="SecondPage"
-        component={SecondPage}
+        name="HomePage"
+        component={FirstPage}
         options={{
-          title: 'Second Page', //Set Header Title
-        }}
-      />
-      <Stack.Screen
-        name="ThirdPage"
-        component={ThirdPage}
-        options={{
-          title: 'Third Page', //Set Header Title
+          title: 'Stok and Inventory Online', //Set Header Title
+          headerLeft: () => (
+            <NavigationDrawerStructure navigationProps={navigation} />
+          ),
+          headerStyle: {
+            backgroundColor: '#222', //Set Header color
+          },
+          headerTintColor: '#fff', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold', //Set Header text style
+          },
         }}
       />
     </Stack.Navigator>
   );
 }
+
 
 function App() {
   return (
@@ -111,15 +102,16 @@ function App() {
         }}
         drawerContent={(props) => <SideBarMenu {...props} />}>
         <Drawer.Screen
-          name="FirstPage"
-          options={{ drawerLabel: 'First page Option' }}
-          component={firstScreenStack}
+          name="MainScreen"
+          options={{ drawerLabel: 'Main Menu' }}
+          component={MainScreen}
         />
         <Drawer.Screen
-          name="SecondPage"
-          options={{ drawerLabel: 'Second page Option' }}
-          component={secondScreenStack}
+          name="FirstPage"
+          options={{ drawerLabel: 'First page Option' }}
+          component={HomeScreen}
         />
+
       </Drawer.Navigator>
     </NavigationContainer>
   );
